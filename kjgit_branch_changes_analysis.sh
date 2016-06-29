@@ -50,7 +50,7 @@ function analyze_renamed_files {
 	    
 	    test ! -d "$DIR_NAME" && mkdir "$DIR_NAME"
 	    
-	    DIFF=`git diff $DEV_BRANCH $FEATURE_BRANCH -C -- "$LHS" "$RHS"`
+	    DIFF=`git diff -w -C "$DEV_BRANCH:$LHS" "$FEATURE_BRANCH:$RHS"`
 	    FILE_NAME="`basename $LHS`"
 	    echo "$DIFF" >> "$DIR_NAME/$FILE_NAME.diff"
 	    COMPONENT=-1    
@@ -96,7 +96,7 @@ function analyze_modified_files {
 		
 	    test ! -d "$DIR_NAME" && mkdir "$DIR_NAME"
 
-	    DIFF=`git diff $DEV_BRANCH $FEATURE_BRANCH "$FILE_PATH"`
+	    DIFF=`git diff -w $DEV_BRANCH $FEATURE_BRANCH "$FILE_PATH"`
 	    FILE_NAME="`basename $FILE_PATH`"
 	    echo "$DIFF" >> "$DIR_NAME/$FILE_NAME.diff"
 
